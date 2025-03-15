@@ -1,16 +1,16 @@
 <?php
-$host = 'svelte-vulture-7271.g8z.gcp-us-east1.cockroachlabs.cloud';
-$port = '26257';
-$dbname = 'gestion_educativa_meta';
-$user = 'junca12';
-$password = 'KMQ0MTgEeVxqXAGHovLlUA';
-$sslmode = 'verify-full';
-$cluster = 'svelte-vulture-7271';
+$host = getenv('DB_HOST');
+$port = getenv('DB_PORT');
+$dbname = getenv('DB_NAME');
+$user = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$sslmode = getenv('DB_SSLMODE');
+$cluster = getenv('DB_CLUSTER');
 
 try {
     $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;sslmode=$sslmode;options='--cluster=$cluster'", $user, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "";
+    echo "Conexión exitosa 🎉";
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
 }
